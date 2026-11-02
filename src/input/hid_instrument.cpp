@@ -181,20 +181,18 @@ static void DecodePs4Guitar(const Report& r, OrbisPadData& data) {
                   .whammy = r[44],
                   .tilt = r[45]},
                  data);
-    EncodeNavigation({.hat = static_cast<u8>(r[5] & 0x0F),
-                      .start = Bit(r, 6, 0x20),
-                      .select = Bit(r, 6, 0x10)},
-                     data);
+    EncodeNavigation(
+        {.hat = static_cast<u8>(r[5] & 0x0F), .start = Bit(r, 6, 0x20), .select = Bit(r, 6, 0x10)},
+        data);
 }
 
 static void DecodePs4Drums(const Report& r, OrbisPadData& data) {
     DrumState state{.kick1 = Bit(r, 6, 0x01), .kick2 = Bit(r, 6, 0x02)};
     std::copy_n(r.begin() + 43, NumDrumLanes, state.velocities.begin());
     EncodeDrums(state, data);
-    EncodeNavigation({.hat = static_cast<u8>(r[5] & 0x0F),
-                      .start = Bit(r, 6, 0x20),
-                      .select = Bit(r, 6, 0x10)},
-                     data);
+    EncodeNavigation(
+        {.hat = static_cast<u8>(r[5] & 0x0F), .start = Bit(r, 6, 0x20), .select = Bit(r, 6, 0x10)},
+        data);
 }
 
 static void DecodePs5Guitar(const Report& r, OrbisPadData& data) {
@@ -203,10 +201,9 @@ static void DecodePs5Guitar(const Report& r, OrbisPadData& data) {
                   .whammy = r[41],
                   .tilt = r[42]},
                  data);
-    EncodeNavigation({.hat = static_cast<u8>(r[8] & 0x0F),
-                      .start = Bit(r, 9, 0x20),
-                      .select = Bit(r, 9, 0x10)},
-                     data);
+    EncodeNavigation(
+        {.hat = static_cast<u8>(r[8] & 0x0F), .start = Bit(r, 9, 0x20), .select = Bit(r, 9, 0x10)},
+        data);
 }
 
 // PS3 and Wii instruments use the PS3 controller report, which has no report ID.
